@@ -5,40 +5,68 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import com.farmline.farmline.services.SalesService;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import com.farmline.farmline.model.Sale;
+import com.farmline.farmline.services.DatabaseService;
 
 public class SalesController {
-    @FXML
-    private TextField produceIdField;
-    @FXML
-    private TextField quantitySoldField;
-    @FXML
-    private TextField totalAmountField;
+    @FXML private TextField produceIdField;
+    @FXML private TextField quantitySoldField;
+    @FXML private TextField totalAmountField;
+    @FXML private TextField saleDateField;
+    @FXML private Label statusLabel;
+    @FXML private ListView<String> salesList;
 
-    private SalesService salesService = new SalesService();
+    private DatabaseService dbService = new DatabaseService();
 
     @FXML
-    private void handleRecordSale() {
+    private void handleAddSale() {
         int produceId = Integer.parseInt(produceIdField.getText());
         int quantitySold = Integer.parseInt(quantitySoldField.getText());
         double totalAmount = Double.parseDouble(totalAmountField.getText());
+        String saleDate = saleDateField.getText();
 
-        if (salesService.recordSale(produceId, quantitySold, totalAmount)) {
-            System.out.println("Sale recorded successfully!");
+        if (dbService.addSale(produceId, quantitySold, totalAmount, saleDate)) {
+            statusLabel.setText("Sale recorded successfully!");
+            loadSalesList();
         } else {
-            System.out.println("Failed to record sale.");
+            statusLabel.setText("Failed to record sale.");
+        }
+    }
+
+    private void loadSalesList() {
+        salesList.getItems().clear();
+        for (Sale sale : dbService.getAllSales()) {
+            salesList.getItems().add(sale.toString());
         }
     }
 
     @FXML
-    private void handleNavigateToWeather() {
+    private void goToProduce() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/views/weather.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/farmline/farmline/views/produce.fxml"));
             Stage stage = (Stage) produceIdField.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void goToWeather() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/farmline/farmline/views/weather.fxml"));
+            Stage stage = (Stage) produceIdField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void initialize() {
+        loadSalesList();
     }
 }

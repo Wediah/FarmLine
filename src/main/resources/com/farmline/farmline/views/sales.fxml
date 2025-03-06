@@ -7,20 +7,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.farmline.farmline.controller.SalesController">
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
-
-    <Label text="Sales Management" style="-fx-font-weight: bold;">
-        <font>
-            <Font size="20.0"/>
-        </font>
-    </Label>
-
-    <TextField fx:id="produceIdField" promptText="Produce ID"/>
-    <TextField fx:id="quantitySoldField" promptText="Quantity Sold"/>
-    <TextField fx:id="totalAmountField" promptText="Total Amount"/>
-    <Button text="Record Sale" onAction="#handleRecordSale" defaultButton="true"/>
-    <Button text="Go to Weather" onAction="#handleNavigateToWeather"/>
-</VBox>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ListView?>
+<GridPane fx:controller="com.farmline.farmline.controller.SalesController" xmlns:fx="http://javafx.com/fxml">
+    <Label text="Produce ID:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+    <TextField fx:id="produceIdField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+    <Label text="Quantity Sold:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+    <TextField fx:id="quantitySoldField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+    <Label text="Total Amount:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+    <TextField fx:id="totalAmountField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+    <Label text="Sale Date:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+    <TextField fx:id="saleDateField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+    <Button text="Add Sale" onAction="#handleAddSale" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+    <Label fx:id="statusLabel" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+    <ListView fx:id="salesList" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+    <Button text="Go to Produce" onAction="#goToProduce" GridPane.rowIndex="7" GridPane.columnIndex="0" />
+    <Button text="Go to Weather" onAction="#goToWeather" GridPane.rowIndex="7" GridPane.columnIndex="1" />
+</GridPane>

@@ -9,18 +9,10 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        try {
-            // Load the FXML file
-            Parent root = FXMLLoader.load(getClass().getResource("/com/farmline/farmline/views/login.fxml"));
-
-            // Set up the scene and stage
-            primaryStage.setTitle("Farmers' Market Management");
-            primaryStage.setScene(new Scene(root, 600, 400));
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error loading FXML file: " + e.getMessage());
-        }
+        Parent root = FXMLLoader.load(getClass().getResource("/com/farmline/farmline/views/produce.fxml"));
+        primaryStage.setTitle("Farmers Market Management");
+        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
