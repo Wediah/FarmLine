@@ -8,7 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class WeatherService {
-    private static final String API_KEY = "d61cac44febef484f8e8e7f843d8e194"; // Replace with your API key
+    private static final String API_KEY = ""; // Replace with your API key
     private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather?q=Accra&appid=" + API_KEY;
 
     public String getFormattedWeatherData() {
